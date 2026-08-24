@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Deliberately dumb (launch-hardening plan §C2): static HTML on GitHub Pages, zero vendors,
+     zero JavaScript. It must keep working while Vercel, Railway AND Neon are down — that is its
+     entire job: "a URL that tells the truth when the app can't."
+     The badges are live SVGs served by Healthchecks.io; the meta refresh keeps a left-open tab
+     honest. Incident notes are hand-edited: commit to this repo and Pages redeploys. -->
+<meta http-equiv="refresh" content="60">
+<title>SiteAgent Status</title>
+<style>
+  :root {
+    --bg: #f6f7f9; --card: #ffffff; --text: #111827; --muted: #6b7280; --border: #e5e7eb;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0b0f14; --card: #151b23; --text: #e5e7eb; --muted: #9ca3af; --border: #2a3441; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  main { max-width: 640px; margin: 0 auto; padding: 40px 20px 60px; }
+  h1 { font-size: 1.6rem; margin: 0 0 4px; }
+  .sub { color: var(--muted); margin: 0 0 28px; font-size: .95rem; }
+  .card {
+    background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+    padding: 4px 18px; margin-bottom: 24px;
+  }
+  .row {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    padding: 14px 0; border-bottom: 1px solid var(--border); flex-wrap: wrap;
+  }
+  .row:last-child { border-bottom: none; }
+  .row .what strong { display: block; font-size: 1rem; }
+  .row .what span { color: var(--muted); font-size: .85rem; }
+  .row img { height: 20px; }
+  h2 { font-size: 1.05rem; margin: 0 0 8px; }
+  .notes p { margin: 6px 0; font-size: .95rem; }
+  .notes .quiet { color: var(--muted); }
+  .legend { color: var(--muted); font-size: .85rem; margin-top: 20px; }
+  .legend b { color: var(--text); font-weight: 600; }
+  footer { color: var(--muted); font-size: .8rem; margin-top: 32px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>SiteAgent Status</h1>
+  <p class="sub">Live health of the SiteAgent service. This page is hosted independently of
+  SiteAgent&rsquo;s own infrastructure, so it stays up during an outage. Refreshes itself every minute.</p>
+
+  <div class="card">
+    <div class="row">
+      <div class="what">
+        <strong>App &amp; dashboard</strong>
+        <span>Signing in, the dashboard, and the database behind them</span>
+      </div>
+      <img src="https://healthchecks.io/badge/1e064d34-f613-4e7d-a01d-14de37/LK2pKeUV-2/platform.svg" alt="App status">
+    </div>
+    <div class="row">
+      <div class="what">
+        <strong>Chat connection</strong>
+        <span>The live connection that carries chat and applies changes</span>
+      </div>
+      <img src="https://healthchecks.io/badge/1e064d34-f613-4e7d-a01d-14de37/2F-Pimuu-2/ws-ingress.svg" alt="Chat connection status">
+    </div>
+    <div class="row">
+      <div class="what">
+        <strong>Site monitoring</strong>
+        <span>The background checks watching customer sites (Watch)</span>
+      </div>
+      <img src="https://healthchecks.io/badge/1e064d34-f613-4e7d-a01d-14de37/Rhj_YG1V-2/pulse.svg" alt="Site monitoring status">
+    </div>
+  </div>
+
+  <div class="card notes" style="padding:16px 18px">
+    <h2>Incident notes</h2>
+    <!-- ✏️ HAND-EDITED. During an incident, replace the line below with dated notes, newest first:
+         <p><strong>2026-08-30 14:05 UTC</strong> — Investigating database connection errors.</p>
+         Commit to this repo; GitHub Pages republishes in about a minute. Remove resolved notes
+         after a few days, restoring the quiet line. -->
+    <p class="quiet">No incidents to report.</p>
+  </div>
+
+  <p class="legend">
+    <b>up</b> — healthy, checked within the last minute · <b>late</b> — a check was missed, usually a
+    deploy in progress; investigated if it persists · <b>down</b> — not responding; we have been
+    alerted automatically.
+  </p>
+
+  <footer>Monitoring by <a href="https://healthchecks.io" style="color:inherit">Healthchecks.io</a> —
+  badges above are live and independent of SiteAgent&rsquo;s servers.</footer>
+</main>
+</body>
+</html>
